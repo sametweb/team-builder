@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 const Header = props => {
   return (
     <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">Team Builder</NavbarBrand>
+      <NavLink to="/" className="navbar-brand">
+        Team Builder
+      </NavLink>
       <Nav className="mr-auto" navbar>
         <NavItem>
           <NavLink to="/add-new-team" className="nav-link">

@@ -3,7 +3,7 @@ import Member from "./Member.js";
 import { Row, Col, Alert } from "reactstrap";
 
 const MemberList = ({ members, setMemberToEdit, history }) => {
-  if (members.length > 0) {
+  if (Object.keys(members).length > 0) {
     return (
       <>
         <Row>
@@ -12,8 +12,8 @@ const MemberList = ({ members, setMemberToEdit, history }) => {
           </Col>
         </Row>
         <Row>
-          {members.map(member => (
-            <Col xs="12" key={member.id} className="mb-2">
+          {Object.entries(members).map(member => (
+            <Col xs="12" key={member[0]} className="mb-2">
               <Member
                 history={history}
                 member={member}
@@ -24,15 +24,14 @@ const MemberList = ({ members, setMemberToEdit, history }) => {
         </Row>
       </>
     );
-  } else {
-    return (
-      <Row>
-        <Col>
-          <Alert color="secondary">No teams or team members added yet!</Alert>
-        </Col>
-      </Row>
-    );
   }
+  return (
+    <Row>
+      <Col>
+        <Alert color="secondary">No teams or team members added yet!</Alert>
+      </Col>
+    </Row>
+  );
 };
 
 export default MemberList;

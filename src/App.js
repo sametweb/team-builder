@@ -5,24 +5,41 @@ import { Container, Row, Col } from "reactstrap";
 import Header from "./components/Header";
 import MemberList from "./components/MemberList";
 import Form from "./components/Form";
+import TeamForm from "./components/TeamForm";
 
 const App = () => {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState({
+    "1": {
+      teamId: 1,
+      name: "Samet Mutevelli",
+      email: "sametmutevellioglu@gmail.com",
+      role: "Full-Stack Web Developer"
+    }
+  });
+
   const [memberToEdit, setMemberToEdit] = useState(null);
 
+  const [teams, setTeams] = useState([
+    { id: 1, name: "Best Team Ever" },
+    { id: 2, name: "Worst Team Ever" }
+  ]);
+
   const addNewMember = member => {
-    setMembers([...members, { ...member, id: Date.now() }]);
+    setMembers({ ...members, [Date.now()]: { ...member[0] } });
   };
 
   const editMember = member => {
-    const editedMembers = members.map(editedMember =>
-      editedMember.id !== memberToEdit.id ? editedMember : member
-    );
-    setMembers([...editedMembers]);
-    setMemberToEdit(null);
+    const editedMember = Object.entries(member)[0];
+    console.log({ editedMember });
+    setMembers({ ...members, [editedMember[0]]: { ...editedMember[1] } });
+    // setMemberToEdit(null);
   };
 
-  console.log(members);
+  const addNewTeam = team => {
+    setTeams([...teams, { ...team, id: Date.now() }]);
+  };
+
+  // const editTeam = team => {};
 
   return (
     <Container>
@@ -42,6 +59,17 @@ const App = () => {
           />
         )}
       />
+      <Row>
+        <Col>
+          <Route
+            exact
+            path="/add-new-team"
+            render={renderProps => (
+              <TeamForm {...renderProps} addNewTeam={addNewTeam} />
+            )}
+          />
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Route

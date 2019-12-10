@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 
 const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
   const INITIAL_STATE = {
-    id: 0,
-    name: "",
-    email: "",
-    role: ""
+    0: {
+      teamId: "",
+      name: "",
+      email: "",
+      role: ""
+    }
   };
   const [member, setMember] = useState(INITIAL_STATE);
 
   const handleChange = event => {
-    setMember({ ...member, [event.target.name]: event.target.value });
+    setMember({
+      ...member,
+      [Object.keys(member)[0]]: {
+        ...Object.values(member)[0],
+        [event.target.name]: event.target.value
+      }
+    });
   };
 
   const submitForm = event => {
@@ -21,11 +29,13 @@ const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
   };
 
   useEffect(() => {
-    memberToEdit && setMember(memberToEdit);
+    memberToEdit && setMember({ ...memberToEdit });
   }, [memberToEdit]);
 
+  const currentMember = Object.values(member)[0];
+
   return (
-    <form onSubmit={submitForm}>
+    <form onSubmit={submitForm} method="POST">
       <h2>Add New Team Member</h2>
       <label htmlFor="name">
         Name:{" "}
@@ -33,7 +43,7 @@ const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
           id="name"
           name="name"
           onChange={handleChange}
-          value={member.name}
+          value={currentMember.name}
           placeholder="enter name"
         />
       </label>
@@ -43,7 +53,7 @@ const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
           id="email"
           name="email"
           onChange={handleChange}
-          value={member.email}
+          value={currentMember.email}
           placeholder="enter email"
         />
       </label>
@@ -53,13 +63,13 @@ const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
           id="role"
           name="role"
           onChange={handleChange}
-          value={member.role}
+          value={currentMember.role}
           placeholder="enter role"
         />
       </label>
       <label htmlFor="submit">
         <button id="submit" type="submit">
-          {!memberToEdit ? `Add Team Member` : `Edit ${memberToEdit.name}`}
+          {!memberToEdit ? `Add Team Member` : `Save Changes`}
         </button>
       </label>
     </form>
