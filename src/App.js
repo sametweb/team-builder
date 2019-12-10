@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
 
+import Header from "./components/Header";
 import MemberList from "./components/MemberList";
 import Form from "./components/Form";
 
@@ -23,11 +25,12 @@ const App = () => {
   console.log(members);
 
   return (
-    <>
-      <header>
-        <Link to="/">Home </Link>
-        <Link to="/add-new-member">Add New Member</Link>
-      </header>
+    <Container>
+      <Row>
+        <Col>
+          <Header />
+        </Col>
+      </Row>
       <Route
         exact
         path="/"
@@ -39,24 +42,30 @@ const App = () => {
           />
         )}
       />
-      <Route
-        exact
-        path="/add-new-member"
-        render={renderProps => (
-          <Form {...renderProps} addNewMember={addNewMember} />
-        )}
-      />
-      <Route
-        path="/edit-member"
-        render={renderProps => (
-          <Form
-            {...renderProps}
-            editMember={editMember}
-            memberToEdit={memberToEdit}
+      <Row>
+        <Col>
+          <Route
+            exact
+            path="/add-new-member"
+            render={renderProps => (
+              <Form {...renderProps} addNewMember={addNewMember} />
+            )}
           />
-        )}
-      />
-    </>
+        </Col>
+      </Row>
+      <Row>
+        <Route
+          path="/edit-member"
+          render={renderProps => (
+            <Form
+              {...renderProps}
+              editMember={editMember}
+              memberToEdit={memberToEdit}
+            />
+          )}
+        />
+      </Row>
+    </Container>
   );
 };
 

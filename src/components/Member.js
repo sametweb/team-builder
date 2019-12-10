@@ -1,25 +1,33 @@
 import React from "react";
-
+import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 const Member = ({ member, setMemberToEdit, history }) => {
   return (
-    <div>
-      <h2>{member.name}</h2>
-      <p>
-        <strong>Email:</strong> {member.email}
-      </p>
-      <p>
-        <strong>Role:</strong> {member.role}
-      </p>
-      <button
-        onClick={() => {
-          setMemberToEdit(member);
-          history.push("/edit-member");
-        }}
-      >
-        Edit
-      </button>
-      <button>Delete</button>
-    </div>
+    <Card>
+      <CardBody>
+        <Button className="float-right" color="danger" size="sm">
+          Delete
+        </Button>
+        <Button
+          className="float-right"
+          color="info"
+          size="sm"
+          onClick={() => {
+            setMemberToEdit(member);
+            history.push("/edit-member");
+          }}
+          style={{ marginRight: 5 }}
+        >
+          Edit
+        </Button>
+
+        <CardTitle>
+          <strong>{member.name}</strong>
+        </CardTitle>
+        <CardText>
+          {member.role} | {member.email}
+        </CardText>
+      </CardBody>
+    </Card>
   );
 };
 
