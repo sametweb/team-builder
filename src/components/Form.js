@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Form = ({ addNewMember, editMember, memberToEdit }) => {
+const Form = ({ addNewMember, editMember, memberToEdit, history }) => {
   const INITIAL_STATE = {
     id: 0,
     name: "",
@@ -17,6 +17,7 @@ const Form = ({ addNewMember, editMember, memberToEdit }) => {
     !memberToEdit ? addNewMember({ ...member }) : editMember({ ...member });
     setMember(INITIAL_STATE);
     event.preventDefault();
+    history.push("/");
   };
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Form = ({ addNewMember, editMember, memberToEdit }) => {
   }, [memberToEdit]);
 
   return (
-    <form onSubmit={submitForm} method="POST">
+    <form onSubmit={submitForm}>
       <h2>Add New Team Member</h2>
       <label htmlFor="name">
         Name:{" "}

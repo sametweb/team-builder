@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Route, Link } from "react-router-dom";
 
 import MemberList from "./components/MemberList";
 import Form from "./components/Form";
@@ -23,16 +24,38 @@ const App = () => {
 
   return (
     <>
-      <Form
-        addNewMember={addNewMember}
-        editMember={editMember}
-        memberToEdit={memberToEdit}
+      <header>
+        <Link to="/">Home </Link>
+        <Link to="/add-new-member">Add New Member</Link>
+      </header>
+      <Route
+        exact
+        path="/"
+        render={renderProps => (
+          <MemberList
+            {...renderProps}
+            members={members}
+            setMemberToEdit={setMemberToEdit}
+          />
+        )}
       />
-      {members.length > 0 ? (
-        <MemberList members={members} setMemberToEdit={setMemberToEdit} />
-      ) : (
-        <p>No team members yet.</p>
-      )}
+      <Route
+        exact
+        path="/add-new-member"
+        render={renderProps => (
+          <Form {...renderProps} addNewMember={addNewMember} />
+        )}
+      />
+      <Route
+        path="/edit-member"
+        render={renderProps => (
+          <Form
+            {...renderProps}
+            editMember={editMember}
+            memberToEdit={memberToEdit}
+          />
+        )}
+      />
     </>
   );
 };
