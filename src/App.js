@@ -138,19 +138,21 @@ const App = () => {
           />
         </Col>
       </Row>
-      <Row>
-        <Route
-          path="/edit-member"
-          render={renderProps => (
-            <Form
-              {...renderProps}
-              editMember={editMember}
-              memberToEdit={memberToEdit}
-              teams={teams}
-            />
-          )}
-        />
-      </Row>
+      <Route
+        path="/edit-member"
+        render={renderProps => (
+          <Row>
+            <Col xs="12">
+              <Form
+                {...renderProps}
+                editMember={editMember}
+                memberToEdit={memberToEdit}
+                teams={teams}
+              />
+            </Col>
+          </Row>
+        )}
+      />
     </Container>
   );
 };

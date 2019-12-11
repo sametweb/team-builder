@@ -55,7 +55,6 @@ const TeamForm = ({
         <MyForm onSubmit={handleSubmit}>
           <FormGroup>
             <Input
-              onTouchStart={e => console.log({ e })}
               onBlur={e => {
                 e.target.value.length < 3
                   ? setInvalidStatus(true)
