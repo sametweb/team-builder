@@ -12,14 +12,22 @@ const Header = props => {
           </NavLink>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink to="/add-new-team" className="nav-link">
+              <NavLink
+                to="/add-new-team"
+                className="nav-link"
+                onMouseDown={e => e.preventDefault()}
+              >
                 <NavbarText className="btn btn-dark btn-sm text-white">
                   Add New Team
                 </NavbarText>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/add-new-member" className="nav-link">
+              <NavLink
+                to="/add-new-member"
+                className="nav-link"
+                onMouseDown={e => e.preventDefault()}
+              >
                 <NavbarText className="btn btn-dark btn-sm text-white">
                   Add New Member
                 </NavbarText>

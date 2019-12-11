@@ -7,11 +7,9 @@ import {
   Input,
   FormFeedback,
   Alert,
-  Card,
-  CardBody,
-  CardTitle,
   Button
 } from "reactstrap";
+import TeamCard from "./TeamCard";
 
 const TeamForm = ({
   addNewTeam,
@@ -94,39 +92,14 @@ const TeamForm = ({
           <Alert color="secondary">No teams added yet!</Alert>
         ) : null}
 
-        {teams &&
-          Object.entries(teams).map(team => (
-            <Card key={team[0]} className="mb-2">
-              <CardBody>
-                <Button
-                  className="float-right"
-                  color="danger"
-                  size="sm"
-                  onClick={e => {
-                    editTeam({
-                      [team[0]]: { ...team[1], delete: true }
-                    });
-                    e.stopPropagation();
-                  }}
-                >
-                  Delete
-                </Button>
-                <Button
-                  className="float-right"
-                  color="info"
-                  size="sm"
-                  onClick={() => {
-                    setTeamToEdit({ [team[0]]: { ...team[1] } });
-                    history.push("/edit-team");
-                  }}
-                  style={{ marginRight: 5 }}
-                >
-                  Edit
-                </Button>
-                <CardTitle>{team[1].name}</CardTitle>
-              </CardBody>
-            </Card>
-          ))}
+        {teams && (
+          <TeamCard
+            teams={teams}
+            editTeam={editTeam}
+            setTeamToEdit={setTeamToEdit}
+            history={history}
+          />
+        )}
       </Col>
     </Row>
   );
