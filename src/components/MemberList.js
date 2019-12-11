@@ -11,7 +11,7 @@ const MemberList = ({
 }) => {
   if (Object.keys(members).length > 0) {
     return (
-      <Row>
+      <Row className="mb-5">
         <Col xs="12">
           <h3>Members List</h3>
         </Col>

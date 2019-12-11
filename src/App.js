@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
 import Header from "./components/Header";
 import MemberList from "./components/MemberList";
@@ -38,7 +38,6 @@ const App = () => {
       const newMembers = { ...members };
       delete newMembers[member[0]];
       setMembers({ ...newMembers });
-      console.log({ member });
     } else {
       setMembers({ ...members, [editedMember[0]]: { ...editedMember[1] } });
       setMemberToEdit(null);
@@ -52,30 +51,19 @@ const App = () => {
 
   const editTeam = team => {
     const editedTeam = Object.entries(team)[0];
-
-    console.log(editedTeam[0], editedTeam[1].delete);
-
-    if (editedTeam[1].delete === true) {
+    if (editedTeam[1].delete) {
       const newTeams = { ...teams };
       delete newTeams[editedTeam[0]];
       setTeams({ ...newTeams });
     } else {
-      setTeams({
-        ...teams,
-        [editedTeam[0]]: { ...editedTeam[1] }
-      });
+      setTeams({ ...teams, [editedTeam[0]]: { ...editedTeam[1] } });
       setTeamToEdit(null);
     }
   };
 
-  console.log({ teams });
   return (
     <Container>
-      <Row className="mb-5">
-        <Col>
-          <Header />
-        </Col>
-      </Row>
+      <Header />
       <Route
         exact
         path="/"
@@ -94,17 +82,13 @@ const App = () => {
         exact
         path="/add-new-team"
         render={renderProps => (
-          <Row>
-            <Col>
-              <TeamForm
-                {...renderProps}
-                addNewTeam={addNewTeam}
-                editTeam={editTeam}
-                teams={teams}
-                setTeamToEdit={setTeamToEdit}
-              />
-            </Col>
-          </Row>
+          <TeamForm
+            {...renderProps}
+            addNewTeam={addNewTeam}
+            editTeam={editTeam}
+            teams={teams}
+            setTeamToEdit={setTeamToEdit}
+          />
         )}
       />
 
@@ -112,45 +96,29 @@ const App = () => {
         exact
         path="/edit-team"
         render={renderProps => (
-          <Row>
-            <Col>
-              <TeamForm
-                {...renderProps}
-                editTeam={editTeam}
-                teamToEdit={teamToEdit}
-              />
-            </Col>
-          </Row>
+          <TeamForm
+            {...renderProps}
+            editTeam={editTeam}
+            teamToEdit={teamToEdit}
+          />
         )}
       />
-      <Row>
-        <Col>
-          <Route
-            exact
-            path="/add-new-member"
-            render={renderProps => (
-              <Form
-                {...renderProps}
-                addNewMember={addNewMember}
-                teams={teams}
-              />
-            )}
-          />
-        </Col>
-      </Row>
+      <Route
+        exact
+        path="/add-new-member"
+        render={renderProps => (
+          <Form {...renderProps} addNewMember={addNewMember} teams={teams} />
+        )}
+      />
       <Route
         path="/edit-member"
         render={renderProps => (
-          <Row>
-            <Col xs="12">
-              <Form
-                {...renderProps}
-                editMember={editMember}
-                memberToEdit={memberToEdit}
-                teams={teams}
-              />
-            </Col>
-          </Row>
+          <Form
+            {...renderProps}
+            editMember={editMember}
+            memberToEdit={memberToEdit}
+            teams={teams}
+          />
         )}
       />
     </Container>
