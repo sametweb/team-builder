@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand, Nav, NavItem, NavbarText } from "reactstrap";
+import { Navbar, Nav, NavItem, NavbarText } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
 const Header = props => {

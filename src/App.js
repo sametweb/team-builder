@@ -19,31 +19,59 @@ const App = () => {
 
   const [memberToEdit, setMemberToEdit] = useState(null);
 
-  const [teams, setTeams] = useState([
-    { id: 1, name: "Best Team Ever" },
-    { id: 2, name: "Worst Team Ever" }
-  ]);
+  const [teams, setTeams] = useState({
+    1: { name: "Backend Team" },
+    2: { name: "Frontend Team" },
+    3: { name: "Engineering Team" }
+  });
+
+  const [teamToEdit, setTeamToEdit] = useState(null);
 
   const addNewMember = member => {
-    setMembers({ ...members, [Date.now()]: { ...member[0] } });
+    const newMember = Object.entries(member)[0];
+    setMembers({ ...members, [Date.now()]: { ...newMember[1] } });
   };
 
   const editMember = member => {
     const editedMember = Object.entries(member)[0];
-    console.log({ editedMember });
-    setMembers({ ...members, [editedMember[0]]: { ...editedMember[1] } });
-    // setMemberToEdit(null);
+    if (member.delete) {
+      const newMembers = { ...members };
+      delete newMembers[member[0]];
+      setMembers({ ...newMembers });
+      console.log({ member });
+    } else {
+      setMembers({ ...members, [editedMember[0]]: { ...editedMember[1] } });
+      setMemberToEdit(null);
+    }
   };
 
   const addNewTeam = team => {
-    setTeams([...teams, { ...team, id: Date.now() }]);
+    const newTeam = Object.entries(team)[0];
+    setTeams({ ...teams, [Date.now()]: { ...newTeam[1] } });
   };
 
-  // const editTeam = team => {};
+  const editTeam = team => {
+    const editedTeam = Object.entries(team)[0];
 
+    console.log(editedTeam[0], editedTeam[1].delete);
+
+    if (editedTeam[1].delete === true) {
+      const newTeams = { ...teams };
+      delete newTeams[editedTeam[0]];
+      setTeams({ ...newTeams });
+    } else {
+      setTeams({
+        ...teams,
+        [editedTeam[0]]: { ...editedTeam[1] }
+      });
+      setTeamToEdit(null);
+    }
+  };
+
+  console.log({ teams });
   return (
     <Container>
-      <Row>
+      <Row className="mb-5">
         <Col>
           <Header />
         </Col>
@@ -55,6 +83,8 @@ const App = () => {
           <MemberList
             {...renderProps}
             members={members}
+            teams={teams}
+            editMember={editMember}
             setMemberToEdit={setMemberToEdit}
           />
         )}
@@ -65,7 +95,28 @@ const App = () => {
             exact
             path="/add-new-team"
             render={renderProps => (
-              <TeamForm {...renderProps} addNewTeam={addNewTeam} />
+              <TeamForm
+                {...renderProps}
+                addNewTeam={addNewTeam}
+                editTeam={editTeam}
+                teams={teams}
+                setTeamToEdit={setTeamToEdit}
+              />
+            )}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Route
+            exact
+            path="/edit-team"
+            render={renderProps => (
+              <TeamForm
+                {...renderProps}
+                editTeam={editTeam}
+                teamToEdit={teamToEdit}
+              />
             )}
           />
         </Col>
@@ -76,7 +127,11 @@ const App = () => {
             exact
             path="/add-new-member"
             render={renderProps => (
-              <Form {...renderProps} addNewMember={addNewMember} />
+              <Form
+                {...renderProps}
+                addNewMember={addNewMember}
+                teams={teams}
+              />
             )}
           />
         </Col>
@@ -89,6 +144,7 @@ const App = () => {
               {...renderProps}
               editMember={editMember}
               memberToEdit={memberToEdit}
+              teams={teams}
             />
           )}
         />

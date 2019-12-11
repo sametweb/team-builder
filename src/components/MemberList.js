@@ -2,13 +2,19 @@ import React from "react";
 import Member from "./Member.js";
 import { Row, Col, Alert } from "reactstrap";
 
-const MemberList = ({ members, setMemberToEdit, history }) => {
+const MemberList = ({
+  members,
+  teams,
+  editMember,
+  setMemberToEdit,
+  history
+}) => {
   if (Object.keys(members).length > 0) {
     return (
       <>
         <Row>
           <Col>
-            <h2>List of our team members</h2>
+            <h3>Members List</h3>
           </Col>
         </Row>
         <Row>
@@ -17,6 +23,8 @@ const MemberList = ({ members, setMemberToEdit, history }) => {
               <Member
                 history={history}
                 member={member}
+                editMember={editMember}
+                teams={teams}
                 setMemberToEdit={setMemberToEdit}
               />
             </Col>
