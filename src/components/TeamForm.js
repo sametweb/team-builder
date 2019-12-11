@@ -47,8 +47,8 @@ const TeamForm = ({
         <h3>
           {!teamToEdit
             ? "Add New Team"
-            : `You are editing '${teamToEdit &&
-                Object.entries(teamToEdit)[0][1].name}' team`}
+            : `Editing: "${teamToEdit &&
+                Object.entries(teamToEdit)[0][1].name}"`}
         </h3>
         <MyForm onSubmit={handleSubmit}>
           <FormGroup>

@@ -59,7 +59,11 @@ const Form = ({ addNewMember, editMember, memberToEdit, teams, history }) => {
     <Row>
       <Col xs="12">
         <MyForm onSubmit={submitForm} method="POST">
-          <h2>Add New Team Member</h2>
+          {!memberToEdit ? (
+            <h3>Add New Team Member</h3>
+          ) : (
+            <h3>Editing: "{Object.values(memberToEdit)[0].name}"</h3>
+          )}
           <FormGroup>
             <Label htmlFor="name">Name</Label>
             <Input

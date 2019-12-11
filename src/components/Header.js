@@ -7,7 +7,11 @@ const Header = props => {
     <Row className="mb-5">
       <Col xs="12">
         <Navbar color="light" light expand="md">
-          <NavLink to="/" className="navbar-brand">
+          <NavLink
+            to="/"
+            className="navbar-brand"
+            onMouseDown={e => e.preventDefault()}
+          >
             Team Builder
           </NavLink>
           <Nav className="ml-auto" navbar>
