@@ -11,26 +11,22 @@ const MemberList = ({
 }) => {
   if (Object.keys(members).length > 0) {
     return (
-      <>
-        <Row>
-          <Col>
-            <h3>Members List</h3>
+      <Row>
+        <Col xs="12">
+          <h3>Members List</h3>
+        </Col>
+        {Object.entries(members).map(member => (
+          <Col xs="12" key={member[0]} className="mb-2">
+            <Member
+              history={history}
+              member={member}
+              editMember={editMember}
+              teams={teams}
+              setMemberToEdit={setMemberToEdit}
+            />
           </Col>
-        </Row>
-        <Row>
-          {Object.entries(members).map(member => (
-            <Col xs="12" key={member[0]} className="mb-2">
-              <Member
-                history={history}
-                member={member}
-                editMember={editMember}
-                teams={teams}
-                setMemberToEdit={setMemberToEdit}
-              />
-            </Col>
-          ))}
-        </Row>
-      </>
+        ))}
+      </Row>
     );
   }
   return (

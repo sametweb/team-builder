@@ -8,19 +8,23 @@ const Header = props => {
       <NavLink to="/" className="navbar-brand">
         Team Builder
       </NavLink>
-      <Nav className="mr-auto" navbar>
+      <Nav className="ml-auto" navbar>
         <NavItem>
           <NavLink to="/add-new-team" className="nav-link">
-            <NavbarText>Add New Team</NavbarText>
+            <NavbarText className="btn btn-dark btn-sm text-white">
+              Add New Team
+            </NavbarText>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink to="/add-new-member" className="nav-link">
-            <NavbarText>Add New Member</NavbarText>
+            <NavbarText className="btn btn-dark btn-sm text-white">
+              Add New Member
+            </NavbarText>
           </NavLink>
         </NavItem>
       </Nav>
-      <NavbarText>Simple Text</NavbarText>
+      {/* <NavbarText>Simple Text</NavbarText> */}
     </Navbar>
   );
 };

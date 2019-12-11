@@ -89,12 +89,13 @@ const App = () => {
           />
         )}
       />
-      <Row>
-        <Col>
-          <Route
-            exact
-            path="/add-new-team"
-            render={renderProps => (
+
+      <Route
+        exact
+        path="/add-new-team"
+        render={renderProps => (
+          <Row>
+            <Col>
               <TeamForm
                 {...renderProps}
                 addNewTeam={addNewTeam}
@@ -102,25 +103,26 @@ const App = () => {
                 teams={teams}
                 setTeamToEdit={setTeamToEdit}
               />
-            )}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Route
-            exact
-            path="/edit-team"
-            render={renderProps => (
+            </Col>
+          </Row>
+        )}
+      />
+
+      <Route
+        exact
+        path="/edit-team"
+        render={renderProps => (
+          <Row>
+            <Col>
               <TeamForm
                 {...renderProps}
                 editTeam={editTeam}
                 teamToEdit={teamToEdit}
               />
-            )}
-          />
-        </Col>
-      </Row>
+            </Col>
+          </Row>
+        )}
+      />
       <Row>
         <Col>
           <Route

@@ -30,6 +30,9 @@ const Form = ({ addNewMember, editMember, memberToEdit, teams, history }) => {
   };
 
   useEffect(() => {
+    if (!memberToEdit && !addNewMember) {
+      return history.push("/");
+    }
     memberToEdit && setMember({ ...memberToEdit });
   }, [memberToEdit]);
 
